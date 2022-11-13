@@ -6,6 +6,8 @@
 #include "test_sort.c"
 #include "insertion_sort.c"
 #include "shell_sort.c"
+#include "mergeSort_recursion.c"
+#include "MergeSort.c"
 
 int main(int argc,const char *argv[])
 {
@@ -15,6 +17,8 @@ int main(int argc,const char *argv[])
 	// test_sort(&insertion_sort);	
 	// test_sort(&shell_sort);
 	// test_sort(&ShellSort);
-	test_sort(&ShellSort2);
+	//test_sort(&ShellSort2);
+	test_sort(&merge_sort);
+	test_sort(&MergeSort);
 	return 0;
 }
