@@ -1,0 +1,62 @@
+// 迭代  归并排序
+int min(int x, int y) 
+{
+    return x < y ? x : y;
+}
+
+#include <stdlib.h>
+
+void merge_sort_iteration(int *arr, int length)
+{
+    int *a = arr;
+    int *b = (int *) malloc(length * sizeof(int));
+    int seg, start;
+    for (seg = 1; seg < length; seg += seg) {
+        for (start = 0; start < length; start += seg * 2) {
+            	int low = start;
+		int  mid = min(start + seg, length);
+		int high = min(start + seg * 2, length);
+		    int k = low;
+		    int start1 = low, end1 = mid;
+		    int start2 = mid, end2 = high;
+		    while (start1 < end1 && start2 < end2)
+			b[k++] = a[start1] < a[start2] ? a[start1++]:a[start2++];
+		    while (start1 < end1)
+			b[k++] = a[start1++];
+		    while (start2 < end2)
+			b[k++] = a[start2++];
+        }
+        int *temp = a;
+        a = b;
+        b = temp;
+    }
+    if (a != arr) {
+        int i;
+        for (i = 0; i < length; i++)
+            b[i] = a[i];
+        b = a;
+    }
+    free(b);		
+}
+#include <time.h>
+#include <stdio.h>
+int main(void)
+{
+	srand((unsigned)time(NULL));	
+	int arr[13];
+	for(int i=0; i<13; i++) {
+		arr[i] = rand()%100;
+	}
+	for(int i=0; i<13; ++i)
+		printf("%-4d",arr[i]);
+	putchar('\n');
+
+	merge_sort_iteration(arr,13);
+
+	for(int i=0; i<13; ++i)
+		printf("%-4d",arr[i]);
+	putchar('\n');
+
+	return 0;
+}
+
